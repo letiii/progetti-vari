@@ -1,0 +1,15 @@
+:: copia i file contenuti in una cartella in un'altra cartella (solo i file contenuti, anche nelle sottocartelle, senza riportare la suddivisione in cartelle)
+:: salva dei log di file copiati e ignorati 
+:: fare "esegui come amministratore", altrimenti non funziona la robocopy
+
+@echo off
+
+set source="..."
+set destination="..."
+
+:: log+ serve per appendere alla fine del file i log di una singola sottocartella, senza, il file di log viene sovrascritto ad ogni sottocartella aperta
+:: log non crea la cartella nuova in cui salvarlo, però crea il file nuovo se lo fai puntare alla cartella desiderata
+
+for /r %source% %%F in (.) do if "%%~fF" neq %destination% ROBOCOPY "%%F" %destination% /COPYALL /R:0 /XC /NS /NP /NJH /NJS /LOG+:"...\_cartella_log\LOG.txt"
+
+pause
