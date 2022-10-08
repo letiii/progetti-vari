@@ -1,0 +1,6 @@
+::istruzioni power shell per filtare file di testo
+$inputFile = "...\file_iniziale.txt"
+$outputFile = "...\file_finale.txt"
+ 
+$filters = 'Thumbs.db'
+Get-Content $inputFile | Select-String -pattern $filters -notMatch | Out-File $outputFile
